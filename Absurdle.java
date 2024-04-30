@@ -59,12 +59,15 @@ public class Absurdle {
         input.close();
     }
 
-    // 🟩 ⬜ 🟨
-    // Given a guess and a set of words, return the pattern of the word
-    // @param String guess representing the user's guess on this turn
-    // @param Set<String> words representing the set of words to guess from
-    // @except IllegalArgumentException if the guess is too long or too short
-    // @return String pattern representing the correctness of the word
+    /**
+     * 🟩 ⬜ 🟨
+     * Given a guess and a set of words, return the pattern of the word
+     *
+     * @param String      guess representing the user's guess on this turn
+     * @param Set<String> words representing the set of words to guess from
+     * @except IllegalArgumentException if the guess is too long or too short
+     * @return String pattern representing the correctness of the word
+     */
     public static String makeMove(String guess, Set<String> words) {
         // YOUR CODE HERE
         return "⬜⬜⬜⬜⬜";
@@ -75,6 +78,7 @@ public class Absurdle {
         return "⬜⬜⬜⬜⬜";
     }
 
+    // Print the intro message for the game
     public static void intro() {
         System.out.println("Welcome to Absurdle!");
         System.out.println("The game where you guess the word by guessing the pattern of the word.");
@@ -82,6 +86,13 @@ public class Absurdle {
         System.out.println("Good luck!");
     }
 
+    /**
+     * Check if the game is over
+     *
+     * @param int    guesses representing the number of guesses left
+     * @param String pattern representing the pattern of the word
+     * @return boolean true if the game is over, false otherwise
+     */
     public static boolean gameOver(int guesses, String pattern) {
         return guesses == 0 || !(pattern.contains("⬜") || pattern.contains("🟨"));
     }
