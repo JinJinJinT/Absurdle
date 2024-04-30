@@ -5,8 +5,8 @@ import java.util.Scanner;
 import java.io.File;
 
 /**
- * Absurdle is a word guessing game where the player has to guess a word by
- * guessing the pattern of the word.
+ * Absurdle is a word guessing game where the player has to guess a 5 character
+ * word by guessing the pattern of the word.
  * The player has a limited number of guesses to guess the word.
  * The game will read in a list of words from a file and randomly select a word
  * for the player to guess.
@@ -17,7 +17,7 @@ import java.io.File;
  */
 public class Absurdle {
     public static final String DICTIONARY_FILE = "short-words.txt";
-    public static final int MAX_GUESSES = 6;
+    public static final int MAX_GUESSES = 5;
 
     public static void main(String[] args) throws FileNotFoundException {
         // Read in a txt or words and store in a set
@@ -32,22 +32,21 @@ public class Absurdle {
         intro();
 
         int guesses = MAX_GUESSES;
-        String patternsSoFar = "⬜";
+        String patternsSoFar = "";
         Scanner input = new Scanner(System.in);
-        while (!gameOver(guesses, patternsSoFar)) {
+        while (patternsSoFar.length() == 0 || !gameOver(guesses, patternsSoFar)) {
             System.out.println("You have " + guesses + " guesses left.");
             // get user input
-            System.out.println("Enter your guess: ");
+            System.out.print("Enter your guess: ");
             String guess = input.next();
             try {
                 String pattern = makeMove(guess, words);
                 patternsSoFar += pattern + "\n";
-                System.out.println(pattern);
+                System.out.println(patternsSoFar);
+                guesses--;
             } catch (IllegalArgumentException e) {
                 System.out.println("Word must be five characters long, try again.");
-                continue;
             }
-            guesses--;
         }
 
         if (patternsSoFar.contains("⬜") || patternsSoFar.contains("🟨")) {
@@ -57,6 +56,7 @@ public class Absurdle {
         }
 
         input.close();
+        scanner.close();
     }
 
     /**
